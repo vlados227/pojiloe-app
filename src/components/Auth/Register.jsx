@@ -1,23 +1,24 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import { API_URL } from '../../api/api';
 
 const Register = () => {
-    const [username, setUsername] = useState('');
+    const [fullName, setFullName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
     const [success, setSuccess] = useState('');
 
-    const handleSubmit = async (e) => {
-        e.preventDefault();
+    const handleSubmit = async (event) => {
+        event.preventDefault();
         setError('');
         setSuccess('');
 
         try {
-            const response = await axios.post('/auth/register', {
-                username,
-                email,
-                password,
+            const response = await axios.post(`${API_URL}/register`, {
+                fullName: fullName,
+                email: email,
+                password: password,
             });
             setSuccess('Registration successful! Please log in.');
         } catch (err) {
@@ -33,8 +34,8 @@ const Register = () => {
                     <label>Username:</label>
                     <input
                         type="text"
-                        value={username}
-                        onChange={(e) => setUsername(e.target.value)}
+                        value={fullName}
+                        onChange={(e) => setFullName(e.target.value)}
                         required
                     />
                 </div>

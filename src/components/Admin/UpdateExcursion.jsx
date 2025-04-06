@@ -16,7 +16,6 @@ const UpdateExcursion = () => {
     useEffect(() => {
         const fetchExcursion = async () => {
             try {
-                // const response = await api.fetchExcursionDetails(`/excursions/${id}`);
                 const response = await api.fetchExcursionDetails(id);
                 setExcursion(response.data);
                 setLoading(false);

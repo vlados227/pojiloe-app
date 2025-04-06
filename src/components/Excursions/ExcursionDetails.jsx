@@ -11,7 +11,7 @@ const ExcursionDetails = () => {
     useEffect(() => {
         const fetchExcursionDetails = async () => {
             try {
-                const response = await axios.get(`/api/excursions/${id}`);
+                const response = await axios.get(`/excursions/${id}`);
                 setExcursion(response.data);
             } catch (err) {
                 setError('Error fetching excursion details');

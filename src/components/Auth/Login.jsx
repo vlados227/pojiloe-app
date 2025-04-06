@@ -1,18 +1,30 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import { API_URL } from '../../api/api';
+import { useNavigate } from 'react-router-dom';
 
 const Login = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [fullName, setFullName] = useState('');
     const [error, setError] = useState('');
+    const [success, setSuccess] = useState('');
+    const navigate = useNavigate();
+    
 
-    const handleSubmit = async (e) => {
-        e.preventDefault();
+    const handleSubmit = async (event) => {
+        event.preventDefault();
         try {
-            const response = await axios.post('/auth/login', { email, password });
+            const response = await axios.post(`${API_URL}/login`, { 
+                "email": email,
+                "password": password 
+            });
             // Handle successful login (e.g., store token, redirect)
-            console.log(response.data);
+            console.log(response);
+
+            localStorage.setItem("token", response.data.token);
+            axios.defaults.headers.common['Authorization'] = `Bearer ${response.data.token}`
+            setSuccess('Successful login');
+            navigate("/excursions");
         } catch (err) {
             setError('Invalid credentials. Please try again.');
         }
@@ -29,15 +41,6 @@ const Login = () => {
                         type="email"
                         value={email}
                         onChange={(chEvent) => setEmail(chEvent.target.value)}
-                        required
-                    />
-                </div>
-                <div>
-                    <label>Full name:</label>
-                    <input
-                        type="text"
-                        value={fullName}
-                        onChange={(chEvent) => setFullName(chEvent.target.value)}
                         required
                     />
                 </div>
