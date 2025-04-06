@@ -1,58 +1,66 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import "../../App.css";
 import { API_URL } from '../../api/api';
 
-const ExcursionList = () => {
-    const [excursions, setExcursions] = useState([]);
-    const [loading, setLoading] = useState(true);
-    const [error, setError] = useState(null);
 
-    useEffect(() => {
-        const fetchExcursions = async () => {
-            try {
-                const response = await axios.get(`${API_URL}/excursions/all`)
-                setExcursions(response.data.excrusions || []);
-                console.log(response.data.excrusions);
-                
-                console.log(typeof excursions);
-                
-                
-            } catch (err) {
-                setError('Failed to fetch excursions');
-                console.log(err);
-            } finally {
-                setLoading(false);
-            }
-        };
+const Excursions = () => {
+  const [excursions, setExcursions] = useState([]);
+  const [page, setPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
 
-        fetchExcursions();
-    });
+  useEffect(() => {
+    const fetchExcursions = async () => {
+      try {
+        const response = await axios.get(`${API_URL}/excursions/all?page=${page}&limit=10`);
+        setExcursions(response.data.excrusions);
+        setTotalPages(response.data.totalPages);
+      } catch (error) {
+        console.error('Ошибка при загрузке экскурсий:', error);
+      }
+    };
 
-    if (loading) {
-        return <div>Loading...</div>;
+    fetchExcursions();
+  }, [page]);
+
+  const handleNextPage = () => {
+    if (page < totalPages) {
+      setPage(page + 1);
     }
+  };
 
-    if (error) {
-        return <div>{error}</div>;
+  const handlePreviousPage = () => {
+    if (page > 1) {
+      setPage(page - 1);
     }
+  };
 
-    return (
-        <div>
-            <h1>Excursions</h1>
-            <div className='excursion'>
-                {excursions.map(excursion => (
-                    <li key={excursion._id}>
-                    <h2>{excursion.title}</h2>
-                    <p>{excursion.description}</p>
-                    <p>Место: {excursion.location}</p>
-                    <p>Дата: {new Date(excursion.date).toLocaleDateString()}</p>
-                    <p>Цена: {excursion.price} ₽</p>
-                    <p>Макс. участников: {excursion.maxParticipants}</p>
-                  </li>
-                ))}
-            </div>
-        </div>
-    );
+  return (
+    <div>
+      <h1>Список экскурсий</h1>
+      <ul>
+        {excursions.map((excursion) => (
+          <li key={excursion._id}>
+            <h2>{excursion.title}</h2>
+            <p>{excursion.description}</p>
+            <p>Местоположение: {excursion.location}</p>
+            <p>Дата: {new Date(excursion.date).toLocaleDateString()}</p>
+            <p>Цена: {excursion.price} руб.</p>
+            <p>Максимальное количество участников: {excursion.maxParticipants}</p>
+          </li>
+        ))}
+      </ul>
+      <div>
+        <button onClick={handlePreviousPage} disabled={page === 1}>
+          Назад
+        </button>
+        <span>Страница {page} из {totalPages}</span>
+        <button onClick={handleNextPage} disabled={page === totalPages}>
+          Вперед
+        </button>
+      </div>
+    </div>
+  );
 };
 
-export default ExcursionList;
+export default Excursions;
