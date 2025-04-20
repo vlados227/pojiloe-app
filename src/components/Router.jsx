@@ -8,7 +8,7 @@ import ManageExcursions from "../components/Admin/ManageExcursions";
 import UpdateExcursion from "../components/Admin/UpdateExcursion";
 import ExcursionDetails from "../components/Excursions/ExcursionDetails";
 import UserProfile from "./User/UserGetsSelf";
-import Layout from "./Layout";
+import Layout from "./Layouts/Layout";
 
 const RouterComponent = () => {
   return (
