@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import "../../App.css";
 
+import PurchaseButton from './PurchaseButton';
 
 const ExcursionDetails = () => {
     const { id } = useParams();
@@ -38,8 +39,9 @@ const ExcursionDetails = () => {
             <h1>{excursion.title}</h1>
             <p>{excursion.description}</p>
             <img src={excursion.imageUrl} alt={excursion.title} />
-            <p>Price: ${excursion.price}</p>
-            <p>Date: {new Date(excursion.date).toLocaleDateString()}</p>
+            <p className="price">Price: ${excursion.price}</p>
+            <p className="date">Date: {new Date(excursion.date).toLocaleDateString()}</p>
+            <PurchaseButton></PurchaseButton>
         </div>
     );
 };

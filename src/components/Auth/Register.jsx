@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { API_URL } from '../../api/api';
 import "../../App.css";
 
 
 const Register = () => {
+    const navigate = useNavigate();
     const [fullName, setFullName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -23,17 +25,20 @@ const Register = () => {
                 password: password,
             });
             setSuccess('Registration successful! Please log in.');
+            setTimeout(() => {
+                navigate('/login')
+            }, 500);
         } catch (err) {
             setError(err.response.data.message || 'Registration failed. Please try again.');
         }
     };
 
     return (
-        <div className="register-container">
-            <h2>Register</h2>
+        <div className="register-container general-container">
+            <h2>Регистрация</h2>
             <form onSubmit={handleSubmit}>
                 <div>
-                    <label>Username:</label>
+                    <label>Имя:</label>
                     <input
                         type="text"
                         value={fullName}
@@ -42,7 +47,7 @@ const Register = () => {
                     />
                 </div>
                 <div>
-                    <label>Email:</label>
+                    <label>Электронная почта:</label>
                     <input
                         type="email"
                         value={email}
@@ -51,7 +56,7 @@ const Register = () => {
                     />
                 </div>
                 <div>
-                    <label>Password:</label>
+                    <label>Пароль:</label>
                     <input
                         type="password"
                         value={password}
@@ -59,7 +64,7 @@ const Register = () => {
                         required
                     />
                 </div>
-                <button type="submit">Register</button>
+                <button className='submit' type="submit">Register</button>
                 {error && <p className="error">{error}</p>}
                 {success && <p className="success">{success}</p>}
             </form>

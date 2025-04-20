@@ -58,7 +58,7 @@ export const updateExcursion = async (id, excursionData) => {
 
 export const deleteExcursion = async (id) => {
     try {
-        const response = await axios.delete(`${API_URL}/admin/excrusions/delete/${id}`);
+        const response = await axios.delete(`${API_URL}/admin/excursions/delete/${id}`);
         return response.data;
     } catch (error) {
         throw error.response.data;

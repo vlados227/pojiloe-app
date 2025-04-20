@@ -8,7 +8,7 @@ const Login = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
-    const [success, setSuccess] = useState('');
+    //const [success, setSuccess] = useState('');
     const navigate = useNavigate();
     
 
@@ -19,20 +19,18 @@ const Login = () => {
                 "email": email,
                 "password": password 
             });
-            // Handle successful login (e.g., store token, redirect)
-            console.log(response);
 
             localStorage.setItem("token", response.data.token);
             axios.defaults.headers.common['Authorization'] = `Bearer ${response.data.token}`
-            setSuccess('Successful login');
-            navigate("/excursions");
+            //setSuccess('Successful login');
+            navigate("/excursions/all");
         } catch (err) {
             setError('Invalid credentials. Please try again.');
         }
     };
 
     return (
-        <div className="login-container">
+        <div className="login-container general-container">
             <h2>Login</h2>
             {error && <p className="error">{error}</p>}
             <form onSubmit={handleSubmit}>
@@ -54,7 +52,7 @@ const Login = () => {
                         required
                     />
                 </div>
-                <button type="submit">Login</button>
+                <button className='submit' type="submit">Login</button>
             </form>
         </div>
     );

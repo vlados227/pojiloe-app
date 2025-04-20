@@ -23,7 +23,7 @@ const ManageExcursions = () => {
 
     const handleDelete = async (id) => {
         try {
-            await axios.delete(`/api/admin/excrusions/delete/${id}`);
+            await axios.delete(`/api/admin/excursions/delete/${id}`);
             setExcursions(excursions.filter(excursion => excursion._id !== id));
         } catch (err) {
             setError(err.message);
