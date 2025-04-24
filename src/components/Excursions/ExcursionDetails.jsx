@@ -41,7 +41,6 @@ const ExcursionDetails = () => {
             <img src={excursion.imageUrl} alt={excursion.title} />
             <p className="price">Price: ${excursion.price}</p>
             <p className="date">Date: {new Date(excursion.date).toLocaleDateString()}</p>
-            <PurchaseButton></PurchaseButton>
         </div>
     );
 };

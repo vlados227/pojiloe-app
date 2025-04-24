@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import { API_URL } from '../../api/api';
 
 const ManageExcursions = () => {
     const [excursions, setExcursions] = useState([]);
@@ -9,7 +10,7 @@ const ManageExcursions = () => {
     useEffect(() => {
         const fetchExcursions = async () => {
             try {
-                const response = await axios.get('/api/admin/all');
+                const response = await axios.get(`${API_URL}/admin/all`);
                 setExcursions(response.data);
             } catch (err) {
                 setError(err.message);
@@ -23,7 +24,7 @@ const ManageExcursions = () => {
 
     const handleDelete = async (id) => {
         try {
-            await axios.delete(`/api/admin/excursions/delete/${id}`);
+            await axios.delete(`${API_URL}/admin/excursions/delete/${id}`);
             setExcursions(excursions.filter(excursion => excursion._id !== id));
         } catch (err) {
             setError(err.message);

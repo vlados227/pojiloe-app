@@ -1,8 +1,23 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Outlet, Link } from "react-router-dom";
-import "../App.css"; 
+import "../../App.css"; 
+import { jwtDecode } from "jwt-decode";
 
 const Navbar = () => {
+  const [role, setRole] = useState(null);
+
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (token) {
+      try {
+        const decoded = jwtDecode(token);
+        setRole(decoded.role)
+      } catch (error) {
+        alert("нет доступа")
+      }
+    }
+  }, [])
+
   return (
     <nav className="navbar">
       <ul className="navbar-list">
@@ -21,9 +36,13 @@ const Navbar = () => {
         <li className="navbar-item">
           <Link to="/excursions/all" className="navbar-link">Excursions</Link>
         </li>
-        <li className="navbar-item">
-          <Link to="/admin/manage-excursions" className="navbar-link">Admin</Link>
-        </li>
+        {
+          role == "admin" && (
+            <li className="navbar-item">
+              <Link to="/admin/manage-excursions" className="navbar-link">Admin panel</Link>
+            </li>
+          )
+        }
       </ul>
     </nav>
   );

@@ -25,7 +25,7 @@ const PurchaseButton = ({ excursionId }) => {
 
       // Обработка успешного ответа
       alert("Экскурсия успешно приобретена!");
-      console.log(response.data);
+      //console.log(response.data);
     } catch (error) {
       console.error("Ошибка при покупке экскурсии:", error);
       alert(
