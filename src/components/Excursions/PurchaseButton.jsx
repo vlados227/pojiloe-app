@@ -1,12 +1,15 @@
-import React from "react";
+import React, { useState } from "react";
 import axios from "axios";
 import { API_URL } from "../../api/api";
 
 
-const PurchaseButton = ({ excursionId }) => {
+const PurchaseButton = ({ excursionId, userId }) => {
+
+  const [message, setMessage] = useState(null)
   const handlePurchase = async () => {
     try {
       const token = localStorage.getItem("token");
+      const date = new Date().toISOString();
 
       if (!token) {
         alert("Вы не авторизованы!");
@@ -15,7 +18,7 @@ const PurchaseButton = ({ excursionId }) => {
 
       const response = await axios.post(
         `${API_URL}/excursions/purchase`,
-        { excursionId },
+        { excursionId, userId, date },
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -25,7 +28,8 @@ const PurchaseButton = ({ excursionId }) => {
 
       // Обработка успешного ответа
       alert("Экскурсия успешно приобретена!");
-      //console.log(response.data);
+      console.log(message);
+      // setMessage(response.data.message)
     } catch (error) {
       console.error("Ошибка при покупке экскурсии:", error);
       alert(

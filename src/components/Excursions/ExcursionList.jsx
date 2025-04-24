@@ -15,8 +15,10 @@ const Excursions = () => {
     const fetchExcursions = async () => {
       try {
         const response = await axios.get(`${API_URL}/excursions/all?page=${page}&limit=10`);
+        console.log(response.data);
         setExcursions(response.data.excursions);
         setTotalPages(response.data.totalPages);
+        console.log(excursions);
       } catch (error) {
         console.error('Ошибка при загрузке экскурсий:', error);
       }
