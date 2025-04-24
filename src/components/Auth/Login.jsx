@@ -31,11 +31,11 @@ const Login = () => {
 
     return (
         <div className="login-container general-container">
-            <h2>Login</h2>
+            <h2>Авторизация</h2>
             {error && <p className="error">{error}</p>}
             <form onSubmit={handleSubmit}>
                 <div>
-                    <label>Email:</label>
+                    <label>Электронная почта:</label>
                     <input
                         type="email"
                         value={email}
@@ -44,7 +44,7 @@ const Login = () => {
                     />
                 </div>
                 <div>
-                    <label>Password:</label>
+                    <label>Пароль:</label>
                     <input
                         type="password"
                         value={password}

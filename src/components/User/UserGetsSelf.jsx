@@ -29,29 +29,28 @@ const UserProfile = () => {
     }, []);
 
     if (error) {
-        return <div>Error: {error}</div>;
+        return <center>Ошибка: {error}</center>;
     }
 
     if (!user) {
-        return <div>Loading...</div>;
+        return <center>Загрузка...</center>;
     }
 
     return (
         <div className="wide-container">
             <div className="user-card">
-            <h1>Профиль пользователя</h1>
+            <h1>Профиль пользователя {user.fullName}</h1>
             <p><strong>Эл. почта:</strong> {user.email}</p>
             <p><strong>Имя:</strong> {user.fullName}</p>
             <div className='center'>
-                {excursions.map((element, index) => (
+                {excursions.map((excursion, index) => (
                     <div className="excursions" key={index}>
-
-                            <p><strong>Название:</strong> {element.title}</p>
-                            <p><strong>Описание:</strong> {element.description}</p>
-                            <p><strong>Адрес:</strong> {element.location}</p>
-                            <p><strong>Дата и время:</strong> {element.date}</p>
-                            <p><strong>Цена:</strong> {element.price}</p>
-                            <p><strong>Кол-во участников:</strong> {element.maxParticipants}</p>                        
+                            <p><strong>Название:</strong> {excursion.title}</p>
+                            <p><strong>Описание:</strong> {excursion.description}</p>
+                            <p><strong>Адрес:</strong> {excursion.location}</p>
+                            <p><strong>Дата и время:</strong> {new Date(excursion.date).toLocaleString()}</p>
+                            <p><strong>Цена:</strong> {excursion.price}</p>
+                            <p><strong>Кол-во участников:</strong> {excursion.maxParticipants}</p>                        
                     </div>
                 ))}
             </div>

@@ -4,21 +4,24 @@ import "../../App.css";
 import { API_URL } from '../../api/api';
 
 import PurchaseButton from './PurchaseButton';
+import { jwtDecode } from 'jwt-decode';
 
 
 const Excursions = () => {
   const [excursions, setExcursions] = useState([]);
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
+  const [decoded, setDecoded] = useState(null);
 
   useEffect(() => {
+
     const fetchExcursions = async () => {
       try {
         const response = await axios.get(`${API_URL}/excursions/all?page=${page}&limit=10`);
-        console.log(response.data);
+
+        setDecoded(jwtDecode(localStorage.getItem("token")));
         setExcursions(response.data.excursions);
         setTotalPages(response.data.totalPages);
-        console.log(excursions);
       } catch (error) {
         console.error('Ошибка при загрузке экскурсий:', error);
       }
@@ -51,7 +54,7 @@ const Excursions = () => {
             <p>Дата: {new Date(excursion.date).toLocaleDateString()}</p>
             <p>Цена: {excursion.price} руб.</p>
             <p>Максимальное количество участников: {excursion.maxParticipants}</p>
-            <PurchaseButton excursionId={excursion._id}/>
+            <PurchaseButton excursionId={excursion._id} userId={decoded._id}/>
           </li>
         ))}
       </ul>

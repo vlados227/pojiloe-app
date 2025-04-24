@@ -1,11 +1,12 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { API_URL } from "../../api/api";
+import "../../App.css"
 
 
 const PurchaseButton = ({ excursionId, userId }) => {
-
-  const [message, setMessage] = useState(null)
+  const [status, setStatus] = useState('Приобрести');
+  
   const handlePurchase = async () => {
     try {
       const token = localStorage.getItem("token");
@@ -28,8 +29,7 @@ const PurchaseButton = ({ excursionId, userId }) => {
 
       // Обработка успешного ответа
       alert("Экскурсия успешно приобретена!");
-      console.log(message);
-      // setMessage(response.data.message)
+      setStatus("Приобретено");
     } catch (error) {
       console.error("Ошибка при покупке экскурсии:", error);
       alert(
@@ -39,8 +39,8 @@ const PurchaseButton = ({ excursionId, userId }) => {
   };
 
   return (
-    <button onClick={handlePurchase}>
-      Купить экскурсию
+    <button className="purchase__button" onClick={handlePurchase}>
+      {status}
     </button>
   );
 };

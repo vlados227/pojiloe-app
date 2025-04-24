@@ -31,8 +31,8 @@ const ManageExcursions = () => {
         }
     };
 
-    if (loading) return <div>Loading...</div>;
-    if (error) return <div>Error: {error}</div>;
+    if (loading) return <center>Загрузка...</center>;
+    if (error) return <center>Ошибка: {error}</center>;
 
     return (
         <div>
