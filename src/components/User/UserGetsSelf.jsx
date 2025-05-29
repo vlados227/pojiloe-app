@@ -2,6 +2,7 @@ import {React, useState, useEffect} from "react";
 import axios from "axios";
 import { API_URL } from "../../api/api";
 import "../../App.css";
+import Logout from "../Layouts/Logout";
 
 const UserProfile = () => {
     const [user, setUser] = useState(null);
@@ -54,6 +55,7 @@ const UserProfile = () => {
                     </div>
                 ))}
             </div>
+                <Logout />
         </div>
         </div>
         

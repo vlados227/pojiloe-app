@@ -11,6 +11,77 @@ h1, h2, h3{
   text-align: center;
 }
 
+.logout__btn{
+  background: linear-gradient(90deg, red 0%, #a51e06 100%);
+  padding: 0.6rem 1.4rem;
+  font-size: 1.5rem;
+  font-weight: 700;
+  border: none;
+  cursor: pointer;
+  border-radius: .9rem;
+  color: #fff;
+  transition: background 0.3s, box-shadow 0.3s, transform 0.2s;
+  box-shadow: 0 4px 16px rgba(99, 102, 241, 0.15), 0 1.5px 4px rgba(0, 188, 212, 0.10);
+}
+
+.pagination {
+  position: relative;
+  display: flex;
+  margin: auto;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  margin: auto;
+}
+.pagination p {
+  margin: 0 15px 0 15px;
+  box-sizing: border-box;
+}
+
+.pagination button {
+  background: linear-gradient(90deg, #6366f1 0%, #00bcd4 100%);
+  color: #fff;
+  padding: 0.6rem 1.4rem;
+  font-size: 1rem;
+  font-weight: 700;
+  border: none;
+  border-radius: 0.75rem;
+  cursor: pointer;
+  box-shadow: 0 4px 16px rgba(99, 102, 241, 0.15), 0 1.5px 4px rgba(0, 188, 212, 0.10);
+  transition: background 0.3s, box-shadow 0.3s, transform 0.2s;
+
+  &:hover {
+    background: linear-gradient(90deg, #4f46e5 0%, #0097a7 100%);
+    box-shadow: 0 6px 24px rgba(99, 102, 241, 0.25), 0 2px 8px rgba(0, 188, 212, 0.18);
+    transform: translateZ(-2px) scale(1.03);
+  }
+
+  &:active {
+    background: linear-gradient(90deg, #4338ca 0%, #00838f 100%);
+    box-shadow: 0 2px 8px rgba(99, 102, 241, 0.18);
+    transform: translate(0) scale(0.98);
+  }
+
+  &:disabled {
+    cursor: not-allowed;
+    box-shadow: none;
+    opacity: 0.7;
+  }
+}
+
+.toLogin__link{
+  text-decoration: underline;
+  color: orangered;
+  font-weight: bold;
+  &:visited{
+    color: orangered;
+  }
+  &:hover{
+    text-decoration: none;
+  }
+}
+
 .navbar {
   background-color: #333;
   padding: 1rem;
@@ -19,7 +90,7 @@ h1, h2, h3{
 .navbar-list {
   list-style: none;
   display: flex;
-  justify-content: space-around;
+  justify-content: space-evenly;
   margin: 0;
   padding: 0;
 }
@@ -194,6 +265,9 @@ h1, h2, h3{
 }
 
 .excursion__card {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
   list-style-type: none;
   max-width: 800px;
   margin: auto;
@@ -204,6 +278,10 @@ h1, h2, h3{
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
   font-family: 'Arial', sans-serif;
   text-align: center;
+}
+
+.excursion__card * {
+  display: inline;
 }
 
 .excursion__card h1 {
@@ -217,7 +295,7 @@ h1, h2, h3{
   color: #555555;
   margin: 0.5rem 0;
 
-  &:last-of-type{
+  &:nth-child(6){
     margin-bottom: 2rem;
   }
 }
@@ -242,6 +320,7 @@ h1, h2, h3{
 }
 
 .purchase__button{
+  width: 13vw;
   background-color: #00bcd4;
   color: white;
   padding: 0.75rem 1.5rem;
@@ -268,6 +347,11 @@ h1, h2, h3{
     cursor: not-allowed;
     box-shadow: none;
   }
+}
+
+.notify{
+  font-style: italic;
+  color: orangered !important;
 }
 
 @media (prefers-reduced-motion: no-preference) {
