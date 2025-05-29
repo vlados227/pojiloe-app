@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 
 import PurchaseButton from './PurchaseButton';
 import { jwtDecode } from 'jwt-decode';
-import Login from '../Auth/Login';
+import { useAuth } from '../Layouts/AuthContext';
 
 
 const Excursions = () => {
@@ -14,10 +14,9 @@ const Excursions = () => {
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
   const [decoded, setDecoded] = useState(null);
-  const [hasToken, setHasToken] = useState(false);
+  const { role } = useAuth();
 
   useEffect(() => {
-
     const fetchExcursions = async () => {
       try {
         const response = await axios.get(`${API_URL}/excursions/all?page=${page}&limit=10`);
@@ -28,17 +27,24 @@ const Excursions = () => {
       }
     };
 
-    const token = localStorage.getItem("token");
-    if (token) {
-      setDecoded(jwtDecode(token));
-      setHasToken(true);
+    if (role === 'user' || role === 'admin') {
+      const token = localStorage.getItem('token');
+      if (token) {
+        try {
+          const decoded = jwtDecode(token);
+          setDecoded(decoded);
+        } catch {
+          setDecoded(null);
+        }
+      } else {
+        setDecoded(null);
+      }
     } else {
       setDecoded(null);
-      setHasToken(false);
     }
 
     fetchExcursions();
-  }, [page]);
+  }, [page, role]);
 
   const handleNextPage = () => {
     if (page < totalPages) {
@@ -64,10 +70,10 @@ const Excursions = () => {
             <p>Дата: {new Date(excursion.date).toLocaleDateString()}</p>
             <p>Цена: {excursion.price} руб.</p>
             <p>Максимальное количество участников: {excursion.maxParticipants}</p>
-            {hasToken && decoded && (
+            {(role === 'user' || role === 'admin') && decoded && (
               <PurchaseButton excursionId={excursion._id} userId={decoded._id}/>
             )}
-            {!hasToken && (
+            {(!role || role === null) && (
               <p className='notify'><Link className='toLogin__link' to={'/login'}>Войдите,</Link> чтобы купить экскурсию</p>
             )}
           </li>

@@ -1,12 +1,19 @@
 import React, { useEffect, useState } from "react";
-import { Outlet, Link } from "react-router-dom";
+import { Outlet, Link, useNavigate } from "react-router-dom";
 import "../../App.css"; 
 import { jwtDecode } from "jwt-decode";
+import { useAuth } from "./AuthContext";
 
 const Navbar = () => {
-  const [role, setRole] = useState(null);
+  const navigate  = useNavigate();
+  const { role, updateRole, setRole } = useAuth();
   const [navmode, setNavmode] = useState();
 
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    setRole(null);
+    navigate('/')
+  };
   
   const unauthNavbar = () => {
     return ( <nav className="navbar">
@@ -25,6 +32,7 @@ const Navbar = () => {
           </nav>)
       }
 
+
   const userNavbar = () => {
     return (
       <nav className="navbar">
@@ -40,14 +48,9 @@ const Navbar = () => {
             </Link>
           </li>
           <li className="navbar-item">
-            <Link to="/login" className="navbar-link">
-              Войти
-            </Link>
-          </li>
-          <li className="navbar-item">
-            <Link to="/register" className="navbar-link">
-              Регистрация
-            </Link>
+            <button className="navbar-link" onClick={handleLogout} style={{background: 'none', border: 'none', cursor: 'pointer', color: '#1976d2'}}>
+              Выйти
+            </button>
           </li>
         </ul>
       </nav>
@@ -68,20 +71,15 @@ const Navbar = () => {
           Профиль
         </Link>
         </li>
-        <li className="navbar-item">
-        <Link to="/login" className="navbar-link">
-          Войти
-        </Link>
-        </li>
-        <li className="navbar-item">
-        <Link to="/register" className="navbar-link">
-          Регистрация
-        </Link>
-        </li>
         <li className="navbar-item admin-link">
         <Link to="/admin" className="navbar-link">
           <span style={{ fontWeight: "bold", color: "#d32f2f" }}>Админ панель</span>
         </Link>
+        </li>
+        <li className="navbar-item">
+          <button className="navbar-link" onClick={handleLogout} style={{background: 'none', border: 'none', cursor: 'pointer'}}>
+            Выйти
+          </button>
         </li>
       </ul>
       </nav>
@@ -91,26 +89,7 @@ const Navbar = () => {
   const navbars = [unauthNavbar(), userNavbar(), adminNavbar()];
 
   useEffect(() => {
-    const checkToken = () => {
-      const token = localStorage.getItem("token");
-      if (token) {
-        try {
-          const decoded = jwtDecode(token);
-          setRole(decoded.role);
-        } catch (error) {
-          setRole(null);
-        }
-      } else {
-        setRole(null);
-      }
-    };
-
-    checkToken();
-    window.addEventListener("storage", checkToken);
-
-    return () => {
-      window.removeEventListener("storage", checkToken);
-    };
+    updateRole();
   }, []);
 
   useEffect(() => {

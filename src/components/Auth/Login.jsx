@@ -2,14 +2,15 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { API_URL } from '../../api/api';
 import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../Layouts/AuthContext';
 import "../../App.css";
 
 const Login = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
-    //const [success, setSuccess] = useState('');
     const navigate = useNavigate();
+    const { updateRole } = useAuth();
     
 
     const handleSubmit = async (event) => {
@@ -21,11 +22,11 @@ const Login = () => {
             });
 
             localStorage.setItem("token", response.data.token);
+            updateRole();
             axios.defaults.headers.common['Authorization'] = `Bearer ${response.data.token}`
-            //setSuccess('Successful login');
             navigate("/excursions/all");
         } catch (err) {
-            setError('Invalid credentials. Please try again.');
+            setError('Попробуйте снова ', err);
         }
     };
 
