@@ -119,6 +119,7 @@ h3 {
 
 .main-content {
   padding: 2rem;
+  padding-top: 0;
   background-color: #f9f9f9;
   min-height: 100vh;
 }
@@ -206,7 +207,8 @@ h3 {
   background: #fafafa;
 }
 .excursions-table button {
-  margin-right: 8px;
+  display: block;
+  margin: auto;
   padding: 6px 14px;
   border: none;
   border-radius: 4px;
@@ -216,6 +218,7 @@ h3 {
 }
 .excursions-table button:first-child {
   background: #ff5252;
+  margin-bottom: 8px;
   color: #fff;
 }
 .excursions-table button:first-child:hover {
@@ -345,14 +348,21 @@ h3 {
   box-shadow: 0 2px 6px rgba(99, 102, 241, 0.2);
 }
 
+.participants__list {
+  list-style-type: none;
+  display: flex;
+  flex-wrap: wrap;
+}
+
 .excursions {
   display: inline-flex;
   flex-direction: column;
   align-items: center;
   padding: 1.5rem;
+  width: 33vw;
   margin: 1rem;
-  background-color: #f9fafb; /* Gray-50 */
-  border: 1px solid #e5e7eb; /* Gray-200 */
+  background-color: #f9fafb; 
+  border: 1px solid #e5e7eb;
   border-radius: 1rem;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
@@ -391,6 +401,9 @@ h3 {
   &:nth-child(6) {
     margin-bottom: 2rem;
   }
+  &:nth-child(2){
+    line-height: 1.5;
+  }
 }
 
 .excursion__card img {
@@ -413,6 +426,7 @@ h3 {
 }
 
 .purchase__button {
+  box-sizing: content-box;
   width: 13vw;
   background-color: #00bcd4;
   color: white;
@@ -445,6 +459,18 @@ h3 {
 .notify {
   font-style: italic;
   color: orangered !important;
+}
+
+@media (max-width: 768px){
+  .navbar-list{
+    flex-wrap: nowrap;
+    gap: 20px;
+  }
+
+  .purchase__button{
+    padding: 10px;
+    width: 25vw;
+  }
 }
 
 @media (prefers-reduced-motion: no-preference) {

@@ -13,13 +13,13 @@ const ManageExcursions = () => {
             try {
                 const response = await api.fetchExcursions(localStorage.token);
                 setExcursions(response.data.excursion);
+
             } catch (err) {
                 setError(err.message);
             } finally {
                 setLoading(false);
             }
         };
-        console.log( excursions);
         fetchExcursions();
     }, []);
 
@@ -43,15 +43,30 @@ const ManageExcursions = () => {
                     <tr>
                         <th>Название</th>
                         <th>Описание</th>
+                        <th>Записаны</th>
                         <th>Дата</th>
                         <th></th>
                     </tr>
                 </thead>
                 <tbody>
-                    {excursions.map(excursion => (
+                    {
+                    excursions.map(excursion => (
                         <tr key={excursion._id}>
                             <td>{excursion.name || excursion.title}</td>
                             <td>{excursion.description}</td>
+                            <td>
+                                {excursion.participants && excursion.participants.length > 0 ? (
+                                    <ul className='participants__list'>
+                                        {excursion.participants.map(user => (
+                                            <li key={user._id}>
+                                                {user.fullName} ({user.email})
+                                            </li>
+                                        ))}
+                                    </ul>
+                                ) : (
+                                    <span>Нет записанных</span>
+                                )}
+                            </td>
                             <td>{Intl.DateTimeFormat('ru-Ru', {
                                 dateStyle: 'full',
                                 timeStyle: 'short',

@@ -26,7 +26,7 @@ const Login = () => {
             axios.defaults.headers.common['Authorization'] = `Bearer ${response.data.token}`
             navigate("/excursions/all");
         } catch (err) {
-            setError('Попробуйте снова ', err);
+            setError('Неправильный логин или пароль ', err);
         }
     };
 

@@ -66,6 +66,7 @@ const Excursions = () => {
           <li className='excursion__card' key={excursion._id}>
             <h2>{excursion.title}</h2>
             <p>{excursion.description}</p>
+            <img src={API_URL + excursion.image} alt="изображение" />
             <p>Местоположение: {excursion.location}</p>
             <p>Дата: {Intl.DateTimeFormat('ru-RU', {
               dateStyle: 'full',
@@ -78,7 +79,7 @@ const Excursions = () => {
               <PurchaseButton excursionId={excursion._id} userId={decoded._id}/>
             )}
             {(!role || role === null) && (
-              <p className='notify'><Link className='toLogin__link' to={'/login'}>Войдите,</Link> чтобы купить экскурсию</p>
+              <p className='notify'><Link className='toLogin__link' to={'/login'}>Войдите,</Link> чтобы записаться на экскурсию</p>
             )}
           </li>
         ))}
