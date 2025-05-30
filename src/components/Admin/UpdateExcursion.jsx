@@ -50,12 +50,12 @@ const UpdateExcursion = () => {
     };
 
     if (loading) {
-        return <div>Loading...</div>;
+        return <div>Загрузка...</div>;
     }
 
     return (
         <div className="update-excursion-container">
-            <h2>Update Excursion</h2>
+            <h2>Обновить экскурсию</h2>
             <form className="update-excursion-form" onSubmit={handleSubmit}>
                 <div className="form-group">
                     <label>Название:</label>
@@ -78,7 +78,12 @@ const UpdateExcursion = () => {
                     />
                 </div>
                 <div className="form-group">
-                    <label>Дата:</label>
+                    <label>Дата: {Intl.DateTimeFormat('ru-ru', {
+                        dateStyle: 'full',
+                        timeStyle: 'short',
+                        timeZone: 'Europe/Samara'
+                    }).format(new Date(excursion.date))
+                    }</label>
                     <input
                         type="datetime-local"
                         name="date"
@@ -97,7 +102,7 @@ const UpdateExcursion = () => {
                         required
                     />
                 </div>
-                <button className="submit-btn" type="submit">Update Excursion</button>
+                <button className="submit-btn" type="submit">Обновить экскурсию</button>
             </form>
         </div>
     );

@@ -9,6 +9,7 @@ const AddExcursion = () => {
     const [date, setDate] = useState('');
     const [maxParticipants, setMaxParticipants] = useState('');
     const [location, setLocation] = useState('');
+    const [image, setImage] = useState(null);
     const [error, setError] = useState('');
     const [success, setSuccess] = useState('');
 
@@ -17,21 +18,31 @@ const AddExcursion = () => {
         setError('');
         setSuccess('');
 
-        const excursionData = {
-            title,
-            description,
-            price: Number(price),
-            date,
-            maxParticipants: Number(maxParticipants),
-            location
-        };
+        if (!image) {
+            setError('Изображение обязательно');
+            return;
+        }
+
+        const formData = new FormData();
+        formData.append('title', title);
+        formData.append('description', description);
+        formData.append('price', price);
+        formData.append('date', date);
+        formData.append('maxParticipants', maxParticipants);
+        formData.append('location', location);
+        formData.append('image', image);
 
         try {
             const token = localStorage.getItem('token');
             const response = await axios.post(
                 `${API_URL}/admin/add`,
-                excursionData,
-                { headers: { Authorization: `Bearer ${token}` } }
+                formData,
+                {
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                        'Content-Type': 'multipart/form-data'
+                    }
+                }
             );
             if (response.status !== 201) {
                 throw new Error('Не удалось добавить экскурсию');
@@ -43,6 +54,7 @@ const AddExcursion = () => {
             setDate('');
             setMaxParticipants('');
             setLocation('');
+            setImage(null);
         } catch (err) {
             setError('Не удалось добавить экскурсию. ' + (err.response?.data?.message || err.message));
         }
@@ -53,7 +65,7 @@ const AddExcursion = () => {
             <h2>Добавить новую экскурсию</h2>
             {error && <p style={{ color: 'red' }}>{error}</p>}
             {success && <p style={{ color: 'green' }}>{success}</p>}
-            <form onSubmit={handleSubmit} className='update-excursion-form'>
+            <form onSubmit={handleSubmit} className='update-excursion-form' encType="multipart/form-data">
                 <div className="form-group">
                     <label>Название:</label>
                     <input
@@ -98,12 +110,21 @@ const AddExcursion = () => {
                         required
                     />
                 </div>
-                <div>
+                <div className="form-group">
                     <label>Местоположение:</label>
                     <input
                         type="text"
                         value={location}
                         onChange={e => setLocation(e.target.value)}
+                        required
+                    />
+                </div>
+                <div className="form-group">
+                    <label>Изображение:</label>
+                    <input
+                        type="file"
+                        accept="image/*"
+                        onChange={e => setImage(e.target.files[0])}
                         required
                     />
                 </div>

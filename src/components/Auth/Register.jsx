@@ -24,12 +24,12 @@ const Register = () => {
                 email: email,
                 password: password,
             });
-            setSuccess('Registration successful! Please log in.');
+            setSuccess('Регистрация прошла успешно! Пожалуйста, войдите в систему.');
             setTimeout(() => {
                 navigate('/login')
             }, 500);
         } catch (err) {
-            setError(err.response.data.message || 'Registration failed. Please try again.');
+            setError(err.response.data.message || 'Ошибка регистрации, попробуйте еще раз.');
         }
     };
 
@@ -64,7 +64,7 @@ const Register = () => {
                         required
                     />
                 </div>
-                <button className='submit' type="submit">Register</button>
+                <button className='submit' type="submit">Регистрация</button>
                 {error && <p className="error">{error}</p>}
                 {success && <p className="success">{success}</p>}
             </form>
