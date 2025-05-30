@@ -78,7 +78,12 @@ const UpdateExcursion = () => {
                     />
                 </div>
                 <div className="form-group">
-                    <label>Дата:</label>
+                    <label>Дата: {Intl.DateTimeFormat('ru-ru', {
+                        dateStyle: 'full',
+                        timeStyle: 'short',
+                        timeZone: 'Europe/Samara'
+                    }).format(new Date(excursion.date))
+                    }</label>
                     <input
                         type="datetime-local"
                         name="date"

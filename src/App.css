@@ -117,6 +117,10 @@ h3 {
   color: #00bcd4;
 }
 
+body {
+  background-color: #f9f9f9;
+}
+
 .main-content {
   padding: 2rem;
   padding-top: 0;
@@ -150,6 +154,9 @@ h3 {
   background: #fff;
   border-radius: 8px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+.update-excursion-container p {
+  text-align: center;
 }
 .update-excursion-form .form-group {
   margin-bottom: 18px;
@@ -398,7 +405,7 @@ h3 {
   color: #555555;
   margin: 0.5rem 0;
 
-  &:nth-child(6) {
+  &:nth-child(7) {
     margin-bottom: 2rem;
   }
   &:nth-child(2){

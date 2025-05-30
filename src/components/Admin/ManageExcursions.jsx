@@ -41,6 +41,7 @@ const ManageExcursions = () => {
             <table className="excursions-table">
                 <thead>
                     <tr>
+                        <th>№</th>
                         <th>Название</th>
                         <th>Описание</th>
                         <th>Записаны</th>
@@ -50,8 +51,9 @@ const ManageExcursions = () => {
                 </thead>
                 <tbody>
                     {
-                    excursions.map(excursion => (
+                    excursions.map((excursion, index) => (
                         <tr key={excursion._id}>
+                            <td>{index + 1 }</td>
                             <td>{excursion.name || excursion.title}</td>
                             <td>{excursion.description}</td>
                             <td>
