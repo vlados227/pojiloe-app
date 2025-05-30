@@ -98,7 +98,7 @@ const AddExcursion = () => {
                         required
                     />
                 </div>
-                <div>
+                <div className="form-group">
                     <label>Местоположение:</label>
                     <input
                         type="text"

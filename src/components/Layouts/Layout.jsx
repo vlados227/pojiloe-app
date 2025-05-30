@@ -23,6 +23,11 @@ const Navbar = () => {
                 </Link>
               </li>
               <li className="navbar-item">
+                <Link to="/login" className="navbar-link">
+                  Войти
+                </Link>
+              </li>
+              <li className="navbar-item">
                 <Link to="/register" className="navbar-link">
                   Регистрация
                 </Link>
@@ -47,7 +52,7 @@ const Navbar = () => {
             </Link>
           </li>
           <li className="navbar-item">
-            <button className="navbar-link" onClick={handleLogout} style={{background: 'none', border: 'none', cursor: 'pointer', color: '#1976d2'}}>
+            <button className="navbar-link" onClick={handleLogout} style={{background: 'none', border: 'none', cursor: 'pointer'}}>
               Выйти
             </button>
           </li>

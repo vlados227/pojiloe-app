@@ -64,7 +64,7 @@ const Register = () => {
                         required
                     />
                 </div>
-                <button className='submit' type="submit">Register</button>
+                <button className='submit' type="submit">Регистрация</button>
                 {error && <p className="error">{error}</p>}
                 {success && <p className="success">{success}</p>}
             </form>

@@ -58,8 +58,8 @@ const ManageExcursions = () => {
                                 timeZone: 'Europe/Samara'
                             }).format(new Date(excursion.date))}</td>
                             <td>
-                                <button onClick={() => handleDelete(excursion._id)}>Delete</button>
-                                <button onClick={() => navigate(`/admin/update-excursion/${excursion._id}`)}>Update</button>
+                                <button onClick={() => handleDelete(excursion._id)}>Удалить</button>
+                                <button onClick={() => navigate(`/admin/update-excursion/${excursion._id}`)}>Обновить</button>
                             </td>
                         </tr>
                     ))}

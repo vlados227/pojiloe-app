@@ -32,7 +32,7 @@ const Login = () => {
 
     return (
         <div className="login-container general-container">
-            <h2>Авторизация</h2>
+            <h2>Вход</h2>
             {error && <p className="error">{error}</p>}
             <form onSubmit={handleSubmit}>
                 <div>
@@ -53,7 +53,7 @@ const Login = () => {
                         required
                     />
                 </div>
-                <button className='submit' type="submit">Login</button>
+                <button className='submit' type="submit">Войти</button>
             </form>
         </div>
     );
