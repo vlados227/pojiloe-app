@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Login from "../components/Auth/Login";
 import Register from "../components/Auth/Register";
 import ExcursionList from "../components/Excursions/ExcursionList";
-import AddExcursion from "../components/Excursions/AddExcursion";
+import AddExcursion from "./Admin/AddExcursion";
 import ManageExcursions from "../components/Admin/ManageExcursions";
 import UpdateExcursion from "../components/Admin/UpdateExcursion";
 import ExcursionDetails from "../components/Excursions/ExcursionDetails";

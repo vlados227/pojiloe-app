@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Outlet, Link, useNavigate } from "react-router-dom";
 import "../../App.css"; 
-import { jwtDecode } from "jwt-decode";
 import { useAuth } from "./AuthContext";
 
 const Navbar = () => {
@@ -71,10 +70,15 @@ const Navbar = () => {
           Профиль
         </Link>
         </li>
-        <li className="navbar-item admin-link">
-        <Link to="/admin" className="navbar-link">
-          <span style={{ fontWeight: "bold", color: "#d32f2f" }}>Админ панель</span>
+        <li className="navbar-item">
+        <Link className='navbar-link' to="/admin/manage-excursions">
+          Управление экскурсиями
         </Link>
+        </li>
+        <li className="navbar-item">
+          <Link className="navbar-link" to="/admin/add-excursion">
+            Добавить экскурсию
+          </Link>
         </li>
         <li className="navbar-item">
           <button className="navbar-link" onClick={handleLogout} style={{background: 'none', border: 'none', cursor: 'pointer'}}>

@@ -20,47 +20,67 @@ export const register = async (userData) => {
     }
 };
 
-export const fetchExcursions = async () => {
+export const fetchExcursionDetails = async (id, token) => {
     try {
-        const response = await axios.get(`${API_URL}/excursions/all`);
+        const response = await axios.get(`${API_URL}/admin/excursions/${id}`, {
+            headers:{
+                Authorization: `Bearer ${token}`
+            }
+        });
         return response.data;
     } catch (error) {
         throw error.response.data;
     }
 };
 
-export const fetchExcursionDetails = async (id) => {
+export const addExcursion = async (excursionData, token) => {
+try {
+    const response = await axios.post(`${API_URL}/admin/add`, excursionData, {
+        headers: {
+            Authorization: `Bearer ${token}`
+        }
+    });
+    return response.data;
+} catch (error) {
+    throw error.response.data;
+}
+};
+
+export const updateExcursion = async (id, excursionData, token) => {
     try {
-        const response = await axios.get(`${API_URL}/excursions/${id}`);
+        const response = await axios.put(`${API_URL}/admin/excursions/${id}`, excursionData, {
+            headers:{
+                Authorization: `Bearer ${token}`
+            }
+        });
         return response.data;
     } catch (error) {
         throw error.response.data;
     }
 };
 
-export const addExcursion = async (excursionData) => {
+export const deleteExcursion = async (id, token) => {
     try {
-        const response = await axios.post(`${API_URL}/excursions`, excursionData);
+        const response = await axios.delete(`${API_URL}/admin/excursions/delete/${id}`, {
+            headers:{
+                Authorization: `Bearer ${token}`
+            }
+        });
         return response.data;
     } catch (error) {
         throw error.response.data;
     }
 };
 
-export const updateExcursion = async (id, excursionData) => {
+export const fetchExcursions = async (token) => {
     try {
-        const response = await axios.put(`${API_URL}/admin/excursions/${id}`, excursionData);
-        return response.data;
+        const response = await axios.get(`${API_URL}/admin/all`, {
+            headers:{
+                Authorization: `Bearer ${token}`
+            }
+        });
+        return response;
     } catch (error) {
-        throw error.response.data;
+        throw error.response.data
     }
-};
-
-export const deleteExcursion = async (id) => {
-    try {
-        const response = await axios.delete(`${API_URL}/admin/excursions/delete/${id}`);
-        return response.data;
-    } catch (error) {
-        throw error.response.data;
-    }
-};
+}
