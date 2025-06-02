@@ -95,26 +95,18 @@ const Navbar = () => {
     );
   }
 
-  const navbars = [unauthNavbar(), userNavbar(), adminNavbar()];
-
   useEffect(() => {
     updateRole();
   }, []);
 
+
+  let modeList = new Map();
   useEffect(() => {
-    switch (role) {
-      case 'user':
-        setNavmode(1);
-        break;
-      case 'admin':
-        setNavmode(2);
-        break;
-      default:
-        setNavmode(0);
-    }
+    modeList.set(undefined || null, unauthNavbar).set('user', userNavbar).set('admin', adminNavbar);
+    setNavmode(modeList.get(role));
   }, [role]);
 
-  return navbars[navmode]
+  return navmode
   
 };
 
