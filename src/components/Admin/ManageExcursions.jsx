@@ -61,7 +61,7 @@ const ManageExcursions = () => {
                                     <ul className='participants__list'>
                                         {excursion.participants.map(user => (
                                             <li key={user._id}>
-                                                {user.fullName} ({user.email})
+                                                {user.fullName} ({user.email}) <br />
                                             </li>
                                         ))}
                                     </ul>
